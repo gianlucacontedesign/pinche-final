@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifica tu Email - {{site_name}}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .greeting {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .message {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .button-container {
+            margin: 40px 0;
+        }
+        .verify-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+            transition: transform 0.3s ease;
+        }
+        .verify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+        }
+        .alternative-link {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .alternative-link-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .alternative-url {
+            font-size: 0.9em;
+            color: #666;
+            word-break: break-all;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .info-section {
+            margin-top: 40px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            border: 1px solid #e0e0e0;
+        }
+        .info-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .info-text {
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .contact-item {
+            text-align: center;
+        }
+        .contact-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .contact-value {
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .footer-text {
+            margin-bottom: 15px;
+        }
+        .footer-contact {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-link {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            opacity: 0.8;
+        }
+        .social-link:hover {
+            opacity: 1;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+            }
+            .content {
+                padding: 30px 20px;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🎯 {{site_name}}</div>
+            <div class="subtitle">¡Verificación de Email!</div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="greeting">¡Hola {{name}}! 👋</div>
+            
+            <div class="message">
+                <strong>¡Bienvenido a {{site_name}}!</strong><br><br>
+                Gracias por registrarte en nuestra tienda de suministros para tatuajes. 
+                Para completar tu registro y comenzar a comprar, necesitas verificar tu dirección de email.
+            </div>
+
+            <div class="button-container">
+                <a href="{{verification_url}}" class="verify-button">
+                    ✅ VERIFICAR EMAIL AHORA
+                </a>
+            </div>
+
+            <div class="alternative-link">
+                <div class="alternative-link-title">🔗 Enlace alternativo:</div>
+                <div class="alternative-url">{{verification_url}}</div>
+                <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                    Copia y pega este enlace en tu navegador si el botón no funciona.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <div class="info-title">📋 ¿Qué pasa después?</div>
+                <div class="info-text">✅ Una vez verificado tu email, podrás:</div>
+                <div class="info-text">🛒 Hacer compras en nuestra tienda</div>
+                <div class="info-text">📱 Acceder a ofertas especiales</div>
+                <div class="info-text">💬 Recibir soporte personalizado</div>
+                <div class="info-text">📦 Seguir el estado de tus pedidos</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">WhatsApp</div>
+                        <a href="https://wa.me/{{whatsapp}}" class="contact-value">{{whatsapp}}</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <a href="mailto:{{support_email}}" class="contact-value">{{support_email}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-text">
+                © 2024 <strong>{{site_name}}</strong> - Suministros de Tatuajes de Calidad
+            </div>
+            <div class="footer-contact">
+                ¿Tienes dudas? Escríbenos a {{support_email}} o por WhatsApp
+            </div>
+            <div class="social-links">
+                <a href="https://pinchesupplies.com.ar" class="social-link">🌐 Sitio Web</a>
+                <a href="mailto:{{admin_email}}" class="social-link">📧 Contacto</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
