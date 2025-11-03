@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a Pinche Supplies</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #6b46c1 0%, #8b5cf6 100%); color: white; padding: 30px 20px; text-align: center; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .tagline { font-size: 14px; opacity: 0.9; }
+        .content { padding: 40px 30px; }
+        .greeting { font-size: 18px; color: #333; margin-bottom: 20px; }
+        .welcome-text { font-size: 16px; line-height: 1.6; color: #555; margin-bottom: 25px; }
+        .features { background: #f8f9ff; padding: 25px; border-radius: 8px; margin: 25px 0; }
+        .features h3 { color: #6b46c1; margin-top: 0; }
+        .features ul { margin: 0; padding-left: 20px; }
+        .features li { margin: 8px 0; color: #555; }
+        .cta-button { display: inline-block; background: #6b46c1; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; font-size: 14px; color: #666; border-top: 1px solid #eee; }
+        .footer a { color: #6b46c1; text-decoration: none; }
+        .divider { height: 1px; background: #eee; margin: 30px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PINCHE SUPPLIES</div>
+            <div class="tagline">Insumos Profesionales para Tatuajes</div>
+        </div>
+        
+        <div class="content">
+            <div class="greeting">¡Hola {{userName}}!</div>
+            
+            <div class="welcome-text">
+                <strong>¡Bienvenido a Pinche Supplies!</strong><br>
+                Tu cuenta ha sido creada exitosamente. Ya puedes empezar a comprar nuestros productos de alta calidad para tatuajes.
+            </div>
+            
+            <div class="features">
+                <h3>🎉 ¿Qué puedes hacer ahora?</h3>
+                <ul>
+                    <li>Explorar nuestro catálogo completo de productos</li>
+                    <li>Comprar con hasta 6 cuotas sin interés</li>
+                    <li>Recibir envíos a todo el país</li>
+                    <li>Recibir ofertas exclusivas</li>
+                    <li>Acceder a tu historial de compras</li>
+                </ul>
+            </div>
+            
+            {{#if tempPassword}}
+            <div class="welcome-text">
+                <strong>Temporal Password:</strong> {{tempPassword}}<br>
+                <em>Te recomendamos cambiar esta contraseña por una más segura una vez que ingreses.</em>
+            </div>
+            {{/if}}
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{siteUrl}}" class="cta-button">🏪 Visitar Tienda</a>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="welcome-text">
+                <strong>¿Necesitas ayuda?</strong><br>
+                Nuestro equipo está disponible para asesorarte. Escríbenos por WhatsApp y te ayudaremos a encontrar exactamente lo que necesitas.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Pinche Supplies</strong></p>
+            <p>Insumos Profesionales para Tatuajes</p>
+            <p>
+                <a href="{{siteUrl}}">{{siteUrl}}</a> | 
+                <a href="https://wa.me/5491123456789">📱 WhatsApp</a>
+            </p>
+            <p style="font-size: 12px; color: #999; margin-top: 15px;">
+                Este email fue enviado automáticamente. No respondas a este mensaje.<br>
+                Si tienes dudas, contáctanos por WhatsApp.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

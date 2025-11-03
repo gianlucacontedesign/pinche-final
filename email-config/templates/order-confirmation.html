@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado #{{order_number}} - Pinche Supplies</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header { background: linear-gradient(135deg, #6b46c1 0%, #8b5cf6 100%); color: white; padding: 30px 20px; text-align: center; }
+        .logo { font-size: 28px; font-weight: bold; margin-bottom: 10px; }
+        .content { padding: 40px 30px; }
+        .greeting { font-size: 18px; color: #333; margin-bottom: 20px; }
+        .success-box { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 25px; border-radius: 8px; margin: 25px 0; text-align: center; }
+        .success-icon { font-size: 48px; margin-bottom: 15px; }
+        .order-summary { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .order-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .order-table th, .order-table td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        .order-table th { background: #f8f9fa; font-weight: bold; }
+        .total-row { font-weight: bold; background: #f0f9ff; }
+        .shipping-info { background: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .contact-info { background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .cta-button { display: inline-block; background: #6b46c1; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 10px; }
+        .footer { background: #f8f9fa; padding: 20px; text-align: center; font-size: 14px; color: #666; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">PINCHE SUPPLIES</div>
+            <div>Tu pedido ha sido confirmado ✅</div>
+        </div>
+        
+        <div class="content">
+            <div class="greeting">¡Hola {{customer_name}}!</div>
+            
+            <div class="success-box">
+                <div class="success-icon">🎉</div>
+                <h2 style="color: #059669; margin: 0;">¡Gracias por tu compra!</h2>
+                <p>Tu pedido #{{order_number}} ha sido confirmado y ya estamos preparando tus productos.</p>
+            </div>
+            
+            <div class="order-summary">
+                <h3>📋 Resumen del Pedido</h3>
+                <p><strong>Número de pedido:</strong> #{{order_number}}</p>
+                <p><strong>Fecha:</strong> {{order_date}}</p>
+                <p><strong>Estado:</strong> <span style="background: #10b981; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">CONFIRMADO</span></p>
+                <p><strong>Método de pago:</strong> {{payment_method}}</p>
+                
+                <h4>📦 Productos</h4>
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each products}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{quantity}}</td>
+                            <td>${{price}}</td>
+                        </tr>
+                        {{/each}}
+                        <tr class="total-row">
+                            <td colspan="2"><strong>Total:</strong></td>
+                            <td><strong>${{total_amount}}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="shipping-info">
+                <h3>🚚 Información de Envío</h3>
+                <p><strong>Dirección de entrega:</strong></p>
+                <p>{{shipping_address}}</p>
+                <p><strong>Tiempo estimado:</strong> 3-7 días hábiles</p>
+                <p><strong>Costo de envío:</strong> {{shipping_cost}}</p>
+            </div>
+            
+            <div class="contact-info">
+                <h3>📱 ¿Cómo seguimos en contacto?</h3>
+                <p>Te mantendremos informado sobre el estado de tu pedido. Si tienes alguna consulta:</p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/5491123456789" style="color: #059669;">+54 9 11 1234-5678</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@pinchesupplies.com.ar" style="color: #059669;">info@pinchesupplies.com.ar</a></p>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{site_url}}/account.php" class="cta-button">👤 Ver Mi Cuenta</a>
+                <a href="{{site_url}}" class="cta-button">🏪 Seguir Comprando</a>
+            </div>
+            
+            <div style="background: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h4 style="color: #0369a1; margin-top: 0;">💡 Consejos</h4>
+                <p>• Guarda este email como comprobante de tu compra</p>
+                <p>• Podrás hacer seguimiento desde tu cuenta</p>
+                <p>• Si tienes alguna duda, escríbenos por WhatsApp</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Pinche Supplies</strong></p>
+            <p>Insumos Profesionales para Tatuajes</p>
+            <p>
+                <a href="{{site_url}}">{{site_url}}</a> | 
+                <a href="https://wa.me/5491123456789">📱 WhatsApp</a>
+            </p>
+            <p style="font-size: 12px; color: #999; margin-top: 15px;">
+                Este email fue enviado automáticamente. Para consultas, contáctanos por WhatsApp.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

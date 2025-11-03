@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✅ Verificación Cart-Ajax - Pinche Supplies</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            line-height: 1.6; 
+            background: #f8f9fa;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { 
+            color: #28a745; 
+            font-weight: bold; 
+        }
+        .error { 
+            color: #dc3545; 
+            font-weight: bold; 
+        }
+        .warning { 
+            color: #ffc107; 
+            font-weight: bold; 
+        }
+        .info { 
+            color: #17a2b8; 
+            font-weight: bold; 
+        }
+        h1 { 
+            color: #333; 
+            border-bottom: 3px solid #007bff; 
+            padding-bottom: 10px; 
+            text-align: center;
+        }
+        h2 { 
+            color: #666; 
+            margin-top: 30px; 
+            border-left: 4px solid #007bff;
+            padding-left: 15px;
+        }
+        .test-box { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 15px 0; 
+        }
+        .test-box.success { 
+            border-left: 4px solid #28a745; 
+            background: #d4edda;
+        }
+        .test-box.error { 
+            border-left: 4px solid #dc3545; 
+            background: #f8d7da;
+        }
+        .test-box.warning { 
+            border-left: 4px solid #ffc107; 
+            background: #fff3cd;
+        }
+        .test-box.info { 
+            border-left: 4px solid #17a2b8; 
+            background: #d1ecf1;
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 14px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .test-button.success {
+            background: #28a745;
+        }
+        .test-button.error {
+            background: #dc3545;
+        }
+        .response-box {
+            background: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .loading {
+            color: #17a2b8;
+            font-style: italic;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .url-test {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            color: #495057;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Verificación Cart-Ajax - Pinche Supplies</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            <strong>🔗 Tu sitio:</strong> pinchesupplies.com.ar<br>
+            <strong>🕒 Hora:</strong> <span id="currentTime"></span>
+        </p>
+
+        <h2>🎯 Test Rápido de URLs</h2>
+        <p>Haz clic en estos botones para probar directamente si cart-ajax.php funciona:</p>
+
+        <div class="grid">
+            <div class="test-box info">
+                <h3>Test 1: Conteo del Carrito</h3>
+                <div class="url-test">https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=get_count</div>
+                <button class="test-button" onclick="testCart('get_count', 'test1-result')">Probar get_count</button>
+                <div id="test1-result" class="response-box">Resultado aparecerá aquí...</div>
+            </div>
+
+            <div class="test-box info">
+                <h3>Test 2: Carrito Completo</h3>
+                <div class="url-test">https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=get_cart</div>
+                <button class="test-button" onclick="testCart('get_cart', 'test2-result')">Probar get_cart</button>
+                <div id="test2-result" class="response-box">Resultado aparecerá aquí...</div>
+            </div>
+        </div>
+
+        <h2>🧪 Test Completo via JavaScript</h2>
+        <p>Este test simula exactamente lo que hace tu sitio web:</p>
+
+        <div class="test-box info">
+            <button class="test-button success" onclick="runFullTest()">🚀 Ejecutar Test Completo</button>
+            <button class="test-button" onclick="clearResults()">🗑️ Limpiar Resultados</button>
+            
+            <div id="full-test-result" class="response-box">Haz clic en "Ejecutar Test Completo" para comenzar...</div>
+        </div>
+
+        <h2>📊 Resultados de los Tests</h2>
+        <div id="test-summary" class="test-box info">
+            <strong>📋 Estado:</strong> Esperando tests...<br>
+            <strong>✅ Tests exitosos:</strong> <span id="success-count">0</span><br>
+            <strong>❌ Tests fallidos:</strong> <span id="error-count">0</span><br>
+            <strong>🔄 Tests pendientes:</strong> <span id="pending-count">2</span>
+        </div>
+
+        <h2>🔍 Diagnóstico Automático</h2>
+        <div class="test-box warning">
+            <button class="test-button" onclick="runDiagnostics()">🔍 Ejecutar Diagnóstico Completo</button>
+            <div id="diagnostic-result" class="response-box">El diagnóstico verificará la configuración de tu servidor...</div>
+        </div>
+
+        <h2>📝 Interpretación de Resultados</h2>
+        <div class="test-box">
+            <h4>Si ves ✅ "JSON válido" y datos:</h4>
+            <div class="success">
+                ¡Perfecto! Tu cart-ajax.php funciona correctamente. El error 404 está solucionado.
+            </div>
+
+            <h4>Si ves ❌ "404 Not Found":</h4>
+            <div class="error">
+                El archivo cart-ajax.php no existe en tu servidor. Sube el archivo inmediatamente.
+            </div>
+
+            <h4>Si ves ❌ "HTML Response":</h4>
+            <div class="error">
+                Estás recibiendo HTML (página de error) en lugar de JSON. Hay un problema de configuración del servidor.
+            </div>
+
+            <h4>Si ves ❌ "Error de Red":</h4>
+            <div class="warning">
+                Problema de conectividad. Verifica que el sitio esté accesible y la URL sea correcta.
+            </div>
+        </div>
+
+        <h2>🆘 Siguiente Paso</h2>
+        <div class="test-box info">
+            <strong>✅ Si todos los tests dan JSON válido:</strong><br>
+            Tu carrito está funcionando. Prueba agregar productos en tu sitio web.
+
+            <br><br>
+
+            <strong>❌ Si algún test falla:</strong><br>
+            1. Sube los archivos del paquete de soluciones<br>
+            2. Ejecuta el diagnóstico completo<br>
+            3. Reporta los resultados específicos
+        </div>
+    </div>
+
+    <script>
+        let successCount = 0;
+        let errorCount = 0;
+        let totalTests = 2;
+
+        // Actualizar hora
+        function updateTime() {
+            document.getElementById('currentTime').textContent = new Date().toLocaleString('es-AR');
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Función para hacer test individual
+        function testCart(action, resultId) {
+            const resultDiv = document.getElementById(resultId);
+            resultDiv.className = 'response-box loading';
+            resultDiv.textContent = '🔄 Probando...';
+
+            const url = `https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=${action}&t=${Date.now()}`;
+
+            fetch(url)
+                .then(response => {
+                    resultDiv.className = 'response-box';
+                    resultDiv.textContent = `📡 Status: ${response.status} ${response.statusText}\n`;
+
+                    if (response.ok) {
+                        return response.text().then(text => {
+                            resultDiv.textContent += `✅ Respuesta recibida:\n${text}\n`;
+                            
+                            try {
+                                const json = JSON.parse(text);
+                                resultDiv.textContent += `✅ JSON válido detectado\n`;
+                                return { success: true, data: json, raw: text };
+                            } catch (e) {
+                                resultDiv.textContent += `❌ No es JSON válido: ${e.message}\n`;
+                                return { success: false, error: 'Invalid JSON', raw: text };
+                            }
+                        });
+                    } else {
+                        resultDiv.textContent += `❌ Error HTTP: ${response.status}\n`;
+                        return response.text().then(text => {
+                            resultDiv.textContent += `Respuesta del servidor:\n${text.substring(0, 200)}...\n`;
+                            return { success: false, error: `HTTP ${response.status}`, raw: text };
+                        });
+                    }
+                })
+                .then(result => {
+                    if (result.success) {
+                        successCount++;
+                    } else {
+                        errorCount++;
+                    }
+                    updateSummary();
+                })
+                .catch(error => {
+                    resultDiv.className = 'response-box';
+                    resultDiv.textContent += `❌ Error de red: ${error.message}\n`;
+                    errorCount++;
+                    updateSummary();
+                });
+        }
+
+        // Actualizar resumen
+        function updateSummary() {
+            const pending = totalTests - successCount - errorCount;
+            document.getElementById('success-count').textContent = successCount;
+            document.getElementById('error-count').textContent = errorCount;
+            document.getElementById('pending-count').textContent = pending;
+            
+            const summary = document.getElementById('test-summary');
+            if (pending === 0) {
+                if (errorCount === 0) {
+                    summary.className = 'test-box success';
+                    summary.innerHTML = '<strong>🎉 ¡Todos los tests pasaron!</strong><br>Tu cart-ajax.php está funcionando correctamente.';
+                } else {
+                    summary.className = 'test-box error';
+                    summary.innerHTML = `<strong>⚠️ ${errorCount} test(s) fallaron</strong><br>Revisa los errores específicos arriba.`;
+                }
+            }
+        }
+
+        // Test completo
+        function runFullTest() {
+            const resultDiv = document.getElementById('full-test-result');
+            resultDiv.textContent = '🚀 Iniciando test completo...\n\n';
+            resultDiv.className = 'response-box';
+
+            successCount = 0;
+            errorCount = 0;
+            updateSummary();
+
+            // Test simulado de add_to_cart
+            const cartData = new FormData();
+            cartData.append('action', 'add_to_cart');
+            cartData.append('product_id', '1');
+            cartData.append('quantity', '1');
+
+            resultDiv.textContent += '1️⃣ Simulando add_to_cart...\n';
+
+            fetch('https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php', {
+                method: 'POST',
+                body: cartData
+            })
+            .then(response => {
+                resultDiv.textContent += `   📡 Status: ${response.status}\n`;
+                return response.text();
+            })
+            .then(text => {
+                resultDiv.textContent += `   📄 Respuesta: ${text.substring(0, 100)}...\n\n`;
+                
+                // Test updateCartCount
+                resultDiv.textContent += '2️⃣ Simulando updateCartCount...\n';
+                
+                return fetch(`https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=get_count&t=${Date.now()}`);
+            })
+            .then(response => {
+                resultDiv.textContent += `   📡 Status: ${response.status}\n`;
+                return response.text();
+            })
+            .then(text => {
+                resultDiv.textContent += `   📄 Respuesta: ${text}\n\n`;
+                
+                resultDiv.textContent += '✅ Test completo finalizado.\n';
+                updateSummary();
+            })
+            .catch(error => {
+                resultDiv.textContent += `❌ Error en test completo: ${error.message}\n`;
+                errorCount++;
+                updateSummary();
+            });
+        }
+
+        // Diagnóstico
+        function runDiagnostics() {
+            const resultDiv = document.getElementById('diagnostic-result');
+            resultDiv.textContent = '🔍 Ejecutando diagnóstico...\n';
+            resultDiv.className = 'response-box';
+
+            const diagnostics = [
+                { name: 'Configuración PHP', test: checkPHPConfig },
+                { name: 'Conectividad', test: checkConnectivity },
+                { name: 'JSON Response', test: checkJSONResponse }
+            ];
+
+            let index = 0;
+            
+            function runNext() {
+                if (index >= diagnostics.length) {
+                    resultDiv.textContent += '\n✅ Diagnóstico completado.';
+                    return;
+                }
+
+                const diag = diagnostics[index];
+                resultDiv.textContent += `\n🔍 Probando ${diag.name}...\n`;
+                
+                diag.test()
+                    .then(result => {
+                        resultDiv.textContent += `   ${result}\n`;
+                        index++;
+                        setTimeout(runNext, 500);
+                    })
+                    .catch(error => {
+                        resultDiv.textContent += `   ❌ Error: ${error.message}\n`;
+                        index++;
+                        setTimeout(runNext, 500);
+                    });
+            }
+            
+            runNext();
+        }
+
+        // Funciones de diagnóstico
+        function checkPHPConfig() {
+            return fetch('https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=get_count')
+                .then(response => {
+                    if (response.ok) {
+                        return '✅ PHP configurado correctamente';
+                    } else {
+                        return `❌ Error PHP: ${response.status}`;
+                    }
+                });
+        }
+
+        function checkConnectivity() {
+            return fetch('https://pinchesupplies.com.ar/', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        return '✅ Conectividad OK';
+                    } else {
+                        return `❌ Conectividad: ${response.status}`;
+                    }
+                });
+        }
+
+        function checkJSONResponse() {
+            return fetch('https://pinchesupplies.com.ar/pinche-supplies/cart-ajax.php?action=get_count')
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        JSON.parse(text);
+                        return '✅ JSON válido';
+                    } catch (e) {
+                        return `❌ JSON inválido: ${e.message}`;
+                    }
+                });
+        }
+
+        // Limpiar resultados
+        function clearResults() {
+            successCount = 0;
+            errorCount = 0;
+            updateSummary();
+            
+            document.getElementById('test1-result').textContent = 'Resultado aparecerá aquí...';
+            document.getElementById('test2-result').textContent = 'Resultado aparecerá aquí...';
+            document.getElementById('full-test-result').textContent = 'Haz clic en "Ejecutar Test Completo" para comenzar...';
+            document.getElementById('diagnostic-result').textContent = 'El diagnóstico verificará la configuración de tu servidor...';
+        }
+
+        // Auto-test al cargar la página
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                testCart('get_count', 'test1-result');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

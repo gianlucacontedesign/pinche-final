@@ -1,0 +1,4 @@
+# Archivo de log de emails
+# Este archivo registra todos los emails enviados
+
+# Inicio de log - <?php echo date('Y-m-d H:i:s'); ?>
