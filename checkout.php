@@ -6,7 +6,7 @@ require_once 'config.php';
 function save_order_via_api($order_data) {
     // Llamar al endpoint de guardado
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://pinchesupplies.com.ar/save-order.php');
+    curl_setopt($ch, CURLOPT_URL, 'https://pinchesupplies.com.ar/save-order-db.php');
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($order_data));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
