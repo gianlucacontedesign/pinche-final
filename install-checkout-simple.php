@@ -11,8 +11,8 @@ ini_set('display_errors', 1);
 // Configuración de base de datos - EDITAR AQUÍ
 $db_host = 'localhost';
 $db_name = 'a0030995_pinche';
-$db_user = 'a0030995_admin';
-$db_pass = 'vawuDU97zu'; // CAMBIAR por tu contraseña real
+$db_user = 'a0030995_pinche'; // ✅ CORREGIDO
+$db_pass = 'vawuDU97zu';
 
 ?>
 <!DOCTYPE html>

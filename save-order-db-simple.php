@@ -12,11 +12,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0); // No mostrar en producción
 ini_set('log_errors', 1);
 
-// Configuración de base de datos - EDITAR AQUÍ
+// Configuración de base de datos - CREDENCIALES CORRECTAS
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'a0030995_pinche');
-define('DB_USER', 'a0030995_admin');
-define('DB_PASS', 'vawuDU97zu'); // CAMBIAR por tu contraseña real
+define('DB_USER', 'a0030995_pinche'); // ✅ CORREGIDO
+define('DB_PASS', 'vawuDU97zu');
 define('DB_CHARSET', 'utf8mb4');
 
 /**

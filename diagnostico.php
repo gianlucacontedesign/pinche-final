@@ -171,11 +171,11 @@ ini_set('display_errors', 1);
         
         <h2>Prueba de Conexión a Base de Datos</h2>
         <?php
-        // Configuración - EDITAR AQUÍ
+        // Configuración - CREDENCIALES CORRECTAS DE TU CONFIG.PHP
         $db_host = 'localhost';
         $db_name = 'a0030995_pinche';
-        $db_user = 'a0030995_admin';
-        $db_pass = 'vawuDU97zu'; // CAMBIAR
+        $db_user = 'a0030995_pinche';  // ✅ CORREGIDO
+        $db_pass = 'vawuDU97zu';
         
         try {
             $pdo = new PDO(
@@ -212,10 +212,11 @@ ini_set('display_errors', 1);
         <h2>Archivos del Sistema</h2>
         <?php
         $files = [
-            'save-order-db.php',
             'save-order-db-simple.php',
             'checkout.php',
             'install-checkout-simple.php',
+            'test-checkout.php',
+            'config.php',
             'includes/config.php',
             'includes/class.database.php',
             'admin/config-admin.php'
